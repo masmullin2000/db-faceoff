@@ -1,0 +1,22 @@
+[package]
+name = "db-faceoff"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fastrand = "2.0.1"
+rusqlite = { version = "0.30.0", optional = true }
+serde = { version = "1.0.196", features = ["derive"] }
+surrealdb = { version = "1.2.0", features = ["kv-speedb", "kv-mem"], optional = true }
+tokio = { version = "1.36.0", features = ["rt-multi-thread", "macros"], optional = true }
+
+[profile.release]
+lto = true
+strip = true
+
+[features]
+default = []
+sqlite = ["dep:rusqlite"]
+surreal = ["dep:surrealdb", "dep:tokio"]
+mem = []
+btree = []
